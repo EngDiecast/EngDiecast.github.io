@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Function Party🎉</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    #qrcode {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>สร้าง QR Code</h2>
+  <input type="text" id="text-input" placeholder="พิมพ์ข้อความที่นี่">
+  <button onclick="generateQR()">สร้าง QR</button>
+
+  <div id="qrcode"></div>
+
+  <!-- โหลดไลบรารี qrcode.js จาก CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    let qr;
+    function generateQR() {
+      const text = document.getElementById("text-input").value;
+      const qrcodeContainer = document.getElementById("qrcode");
+
+      // ล้าง QR เดิมถ้ามี
+      qrcodeContainer.innerHTML = "";
+
+      if (!text.trim()) {
+        alert("กรุณาใส่ข้อความก่อน");
+        return;
+      }
+
+      // สร้าง QR ใหม่
+      qr = new QRCode(qrcodeContainer, {
+        text: text,
+        width: 200,
+        height: 200,
+      });
+    }
+  </script>
+
+</body>
+</html>
