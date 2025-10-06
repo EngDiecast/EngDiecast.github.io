@@ -47,7 +47,7 @@
     </style>
   </head>
   <body
-    class="min-h-screen flex items-center justify-center px-4 py-6 overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900"
+    class="min-h-screen flex items-center justify-center px-1 py-4 overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900"
   >
     <div
       class="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl transform p-8 relative overflow-hidden border border-white/20"
@@ -114,31 +114,35 @@
           <p
             class="text-white text-center text-base sm:text-md mb-0 font-semibold"
           >
-            [ ลงทะเบียนสำเร็จ ]
+            [ ลงทะเบียนสำเร็จ : 
+            <span id="emp-code"></span>
+            ]
           </p>
 
           <p
             class="text-white text-center text-base sm:text-md mb-2 font-semibold"
           >
-           " กรุณานำ QR code มาลงทะเบียนหน้างาน "
+            " กรุณานำ QR code มาลงทะเบียนหน้างาน "
           </p>
 
-          <span class="text-white mb-2 text-lg font-bold mb-1">- บัตรเข้างาน -</span>
+          <span class="text-white mb-2 text-lg font-bold mb-1"
+            >- บัตรเข้างาน -</span
+          >
           <div
             id="qrcode"
             class="w-full flex justify-center items-center p-4 rounded-lg shadow-inner border border-white/20 bg-white/10 backdrop-blur-lg"
-          >
-        </div>
+          ></div>
         </div>
       </div>
     </div>
-    <!-- Card Container -->
 
     <script>
       function generateQR() {
         const text = document.getElementById("text-input").value.trim();
         const qrcodeContainer = document.getElementById("qrcode");
         const qrBlock = document.getElementById("qr-block");
+        const captureArea = document.getElementById("captureArea");
+        const empCodeText = document.getElementById("emp-code");
         qrcodeContainer.innerHTML = "";
 
         if (!text) {
@@ -148,6 +152,8 @@
 
         // แสดง block QR Code
         qrBlock.classList.remove("hidden");
+
+        empCodeText.textContent = text;
 
         const canvasQR = document.createElement("canvas");
         canvasQR.classList.add("rounded-md", "shadow-sm");
@@ -160,17 +166,34 @@
             return;
           }
 
+          // 👉 เปลี่ยน background ชั่วคราวเป็นสีดำ/เทา
+          const oldBg = captureArea.style.background;
+          captureArea.style.background = "#60a5fa1a"; // ดำ (หรือ "#888" สำหรับเทา)
+
+          // 👉 ซ่อน input และปุ่มชั่วคราว
+          const inputBox = document.getElementById("text-input").parentElement;
+          const oldDisplay = inputBox.style.display;
+          inputBox.style.display = "none";
+
           // ดาวน์โหลดภาพการ์ด (รวม QR ด้วย)
           htmlToImage
-            .toPng(document.getElementById("captureArea"))
+            .toPng(captureArea)
             .then(function (dataUrl) {
               const link = document.createElement("a");
               link.download = text + ".png";
               link.href = dataUrl;
               link.click();
+
+              // ✅ คืนค่า background และ input กลับมา
+              captureArea.style.background = oldBg;
+              inputBox.style.display = oldDisplay;
             })
             .catch(function (error) {
               console.error("เกิดข้อผิดพลาดในการสร้างภาพ:", error);
+
+              // คืนค่า background + input กลับเสมอ
+              captureArea.style.background = oldBg;
+              inputBox.style.display = oldDisplay;
             });
         });
       }
