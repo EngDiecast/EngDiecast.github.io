@@ -47,10 +47,10 @@
     </style>
   </head>
   <body
-    class="min-h-screen flex items-center justify-center px-1 py-4 overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900"
+    class="min-h-screen flex items-center justify-center px-1 py-2 overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900"
   >
-    <div
-      class="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl transform p-8 relative overflow-hidden border border-white/20"
+    <div id="captureArea"
+      class="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl transform p-6 relative overflow-hidden border border-white/20"
     >
       <!-- Decorative Elements -->
       <div
@@ -66,32 +66,30 @@
       ></div>
 
       <div
-        id="captureArea"
-        class="w-full max-w-sm rounded-xl flex flex-col items-center p-3 z-10 relative"
+        
+        class="w-full max-w-sm rounded-xl flex flex-col justify-center items-center p-2 z-10 relative mx-auto"
       >
         <!-- Header -->
-        <h1 class="mt-2 text-white text-2xl sm:text-3xl">ลงทะเบียนเข้างาน</h1>
-        <p
-          class="text-white text-center text-base sm:text-lg mb-1 mt-3 font-semibold"
-        >
-          Diecast Function Party 2025 (13 Oct'25)
-        </p>
-        <p class="text-white text-left text-base sm:text-md mb-0 font-semibold">
+        <h1 class="mt-0 mb-3 text-white text-2xl sm:text-3xl font-bold text-nowrap">
+          Diecast Function Party 2025
+        </h1>
+
+        <p class="text-white text-left text-base sm:text-md mb-1 font-semibold">
           @ Convention Ayutthaya City Park
         </p>
         <p
           class="text-white text-center text-base sm:text-md mb-2 font-semibold"
         >
-          Time : 09:40 am. - 15:30 pm.
+          Time : 13 Oct'25 09:40 am. - 15:30 pm.
         </p>
         <p
-          class="text-white text-center text-base sm:text-lg mb-6 font-semibold border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2 rounded-3xl"
+          class="text-white text-center text-base sm:text-lg mb-3 font-semibold border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2 rounded-3xl"
         >
           Theme : " อาชีพในฝัน "
         </p>
 
         <!-- Input & Button -->
-        <div class="w-full flex flex-col gap-3 sm:flex-row sm:gap-3 mb-6">
+        <div class="w-full flex flex-col gap-3 sm:flex-row sm:gap-3 mb-2">
           <input
             id="text-input"
             type="text"
@@ -114,7 +112,7 @@
           <p
             class="text-white text-center text-base sm:text-md mb-0 font-semibold"
           >
-            [ ลงทะเบียนสำเร็จ : 
+            [ ลงทะเบียนสำเร็จ :
             <span id="emp-code"></span>
             ]
           </p>
@@ -135,6 +133,7 @@
         </div>
       </div>
     </div>
+    <div id="exportWrapper" class="hidden"></div>
 
     <script>
       function generateQR() {
@@ -168,7 +167,7 @@
 
           // 👉 เปลี่ยน background ชั่วคราวเป็นสีดำ/เทา
           const oldBg = captureArea.style.background;
-          captureArea.style.background = "#60a5fa1a"; // ดำ (หรือ "#888" สำหรับเทา)
+          captureArea.style.background = "#5c43a912";
 
           // 👉 ซ่อน input และปุ่มชั่วคราว
           const inputBox = document.getElementById("text-input").parentElement;
@@ -198,5 +197,6 @@
         });
       }
     </script>
+
   </body>
 </html>
