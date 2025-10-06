@@ -1,98 +1,179 @@
 <!DOCTYPE html>
 <html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Function Party Register🎉</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Function Party Register🎉</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Galindo&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- QR & Screenshot Libs -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    body {
-      font-family: 'Sarabun', sans-serif;
-      background-color: #f3f6f9;
-    }
-    h1 {
-      font-weight: 700;
-      font-size: 2rem;
-      color: #1e3a8a;
-      text-align: center;
-    }
-    .btn-minimal:hover {
-      background-color: #2563eb;
-      color: white;
-    }
-  </style>
-</head>
-<body class="min-h-screen flex items-center justify-center px-4 py-6">
+    <!-- QR & Screenshot Libs -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js"></script>
 
-  <!-- Card Container -->
-  <div id="captureArea" class="w-full max-w-sm bg-white rounded-xl shadow-md flex flex-col items-center p-6">
-
-    <!-- Header -->
-    <h1 class="mt-2 text-2xl sm:text-3xl">ลงทะเบียนเข้างาน</h1>
-    <p class="text-gray-600 text-center text-base sm:text-lg mb-6 font-semibold">- Diecast Function 2025🎉 -</p>
-
-    <!-- Input & Button -->
-    <div class="w-full flex flex-col gap-3 sm:flex-row sm:gap-3 mb-6">
-      <input id="text-input" type="text" placeholder="รหัสพนักงาน"
-             class="w-full h-12 px-4 rounded-lg border border-gray-300 text-center text-lg focus:outline-none focus:ring-2 focus:ring-blue-300"/>
-      <button onclick="generateQR()"
-              class="w-full sm:w-auto h-12 px-6 bg-blue-500 text-white font-semibold rounded-lg shadow transition-colors duration-200 btn-minimal">
-        ลงทะเบียน
-      </button>
-    </div>
-
-    <!-- QR Code Block -->
-    <div class="w-full flex flex-col items-center mb-4">
-      <span class="text-gray-700 mb-2 font-medium">QR Code</span>
-      <div id="qrcode" class="w-full flex justify-center items-center p-4 bg-gray-50 rounded-lg shadow-inner"></div>
-    </div>
-
-  </div>
-
-  <script>
-    function generateQR() {
-      const text = document.getElementById("text-input").value.trim();
-      const qrcodeContainer = document.getElementById("qrcode");
-      qrcodeContainer.innerHTML = "";
-
-      if (!text) {
-        alert("กรุณาใส่รหัสพนักงานก่อน");
-        return;
+    <style>
+      body {
+        font-family: "Sarabun", sans-serif;
       }
+      h1 {
+        font-weight: 700;
+        font-size: 2rem;
+        color: #1e3a8a;
+        text-align: center;
+      }
+      .btn-minimal:hover {
+        background-color: #2563eb;
+        color: white;
+      }
+      p {
+        /* font-family: "Galindo", sans-serif; */
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex items-center justify-center px-4 py-6 overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900"
+  >
+    <div
+      class="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl transform p-8 relative overflow-hidden border border-white/20"
+    >
+      <!-- Decorative Elements -->
+      <div
+        class="absolute -top-20 -right-20 w-40 h-40 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+      ></div>
+      <div
+        class="absolute -bottom-20 -left-20 w-40 h-40 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+      ></div>
 
-      const canvasQR = document.createElement("canvas");
-      canvasQR.classList.add("rounded-md", "shadow-sm");
-      qrcodeContainer.appendChild(canvasQR);
+      <!-- Glow Effect -->
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-purple-400/10 via-transparent to-blue-400/10 rounded-3xl"
+      ></div>
 
-      QRCode.toCanvas(canvasQR, text, { width: 200 }, function (err) {
-        if (err) {
-          alert("เกิดข้อผิดพลาดในการสร้าง QR Code");
-          console.error(err);
+      <div
+        id="captureArea"
+        class="w-full max-w-sm rounded-xl flex flex-col items-center p-3 z-10 relative"
+      >
+        <!-- Header -->
+        <h1 class="mt-2 text-white text-2xl sm:text-3xl">ลงทะเบียนเข้างาน</h1>
+        <p
+          class="text-white text-center text-base sm:text-lg mb-1 mt-3 font-semibold"
+        >
+          Diecast Function Party 2025 (13 Oct'25)
+        </p>
+        <p class="text-white text-left text-base sm:text-md mb-0 font-semibold">
+          @ Convention Ayutthaya City Park
+        </p>
+        <p
+          class="text-white text-center text-base sm:text-md mb-2 font-semibold"
+        >
+          Time : 09:40 am. - 15:30 pm.
+        </p>
+        <p
+          class="text-white text-center text-base sm:text-lg mb-6 font-semibold border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2 rounded-3xl"
+        >
+          Theme : " อาชีพในฝัน "
+        </p>
+
+        <!-- Input & Button -->
+        <div class="w-full flex flex-col gap-3 sm:flex-row sm:gap-3 mb-6">
+          <input
+            id="text-input"
+            type="text"
+            placeholder="รหัสพนักงาน"
+            class="w-full h-12 px-4 rounded-full border border-gray-300 text-center text-lg focus:outline-none focus:ring-2 focus:ring-blue-300 border-4 border-white/80 shadow-xl"
+          />
+          <button
+            onclick="generateQR()"
+            class="w-full sm:w-auto h-12 px-6 text-md text-nowrap bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-full shadow-lg hover:shadow-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+          >
+            ลงทะเบียน
+          </button>
+        </div>
+
+        <!-- QR Code Block (ซ่อนตอนแรก) -->
+        <div
+          id="qr-block"
+          class="w-full flex flex-col items-center mb-4 text-white hidden"
+        >
+          <p
+            class="text-white text-center text-base sm:text-md mb-0 font-semibold"
+          >
+            [ ลงทะเบียนสำเร็จ ]
+          </p>
+
+          <p
+            class="text-white text-center text-base sm:text-md mb-2 font-semibold"
+          >
+           " กรุณานำ QR code มาลงทะเบียนหน้างาน "
+          </p>
+
+          <span class="text-white mb-2 text-lg font-bold mb-1">- บัตรเข้างาน -</span>
+          <div
+            id="qrcode"
+            class="w-full flex justify-center items-center p-4 rounded-lg shadow-inner border border-white/20 bg-white/10 backdrop-blur-lg"
+          >
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- Card Container -->
+
+    <script>
+      function generateQR() {
+        const text = document.getElementById("text-input").value.trim();
+        const qrcodeContainer = document.getElementById("qrcode");
+        const qrBlock = document.getElementById("qr-block");
+        qrcodeContainer.innerHTML = "";
+
+        if (!text) {
+          alert("กรุณาใส่รหัสพนักงานก่อน");
           return;
         }
 
-        html2canvas(document.getElementById("captureArea"), { scale: 2, useCORS: true }).then(canvas => {
-          canvas.toBlob(function (blob) {
-            const link = document.createElement("a");
-            link.download = text + ".png";
-            link.href = URL.createObjectURL(blob);
-            link.click();
-            URL.revokeObjectURL(link.href);
-          });
-        });
-      });
-    }
-  </script>
+        // แสดง block QR Code
+        qrBlock.classList.remove("hidden");
 
-</body>
+        const canvasQR = document.createElement("canvas");
+        canvasQR.classList.add("rounded-md", "shadow-sm");
+        qrcodeContainer.appendChild(canvasQR);
+
+        QRCode.toCanvas(canvasQR, text, { width: 200 }, function (err) {
+          if (err) {
+            alert("เกิดข้อผิดพลาดในการสร้าง QR Code");
+            console.error(err);
+            return;
+          }
+
+          // ดาวน์โหลดภาพการ์ด (รวม QR ด้วย)
+          htmlToImage
+            .toPng(document.getElementById("captureArea"))
+            .then(function (dataUrl) {
+              const link = document.createElement("a");
+              link.download = text + ".png";
+              link.href = dataUrl;
+              link.click();
+            })
+            .catch(function (error) {
+              console.error("เกิดข้อผิดพลาดในการสร้างภาพ:", error);
+            });
+        });
+      }
+    </script>
+  </body>
 </html>
