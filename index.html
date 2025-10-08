@@ -89,7 +89,7 @@
         </p>
 
         <!-- Input & Button -->
-        <div class="w-full flex flex-col gap-3 sm:flex-row sm:gap-3 mb-2">
+        <div class="w-full flex flex-col gap-3 sm:flex-row sm:gap-3 mb-2" id="button-zone">
           <input
             id="text-input"
             type="text"
@@ -133,7 +133,6 @@
         </div>
       </div>
     </div>
-    <div id="exportWrapper" class="hidden"></div>
 
     <script>
       function generateQR() {
@@ -142,6 +141,7 @@
         const qrBlock = document.getElementById("qr-block");
         const captureArea = document.getElementById("captureArea");
         const empCodeText = document.getElementById("emp-code");
+        const buttonZone = document.getElementById("button-zone")
         qrcodeContainer.innerHTML = "";
 
         if (!text) {
@@ -151,6 +151,9 @@
 
         // แสดง block QR Code
         qrBlock.classList.remove("hidden");
+
+        // ซ่อน button
+        buttonZone.classList.add("hidden");
 
         empCodeText.textContent = text;
 
